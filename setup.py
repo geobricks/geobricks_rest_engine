@@ -11,7 +11,7 @@ setup(
     long_description=open('README.md').read(),
     description='Common entry point for Geobricks REST services.',
     install_requires=[
-        
+        'flask'
     ],
     url='http://pypi.python.org/pypi/GeobricksRESTEngine/'
 )
