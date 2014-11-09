@@ -19,6 +19,13 @@ The following table provides a description of each parameter of the configuratio
 |Name|Description|Mandatory|
 |--------------|-----------|:-------:|
 |description|Human readable description. This parameter is only used to make the configuration file more comprehensible and easy to mantain.|No|
-!path_to_the_blueprint|The import path to the Python file which contains the blueprint.|Yes|
+|path_to_the_blueprint|The import path to the Python file which contains the blueprint.|Yes|
 |blueprint_name|The name of the blueprint variable.|Yes|
 |url_prefix|Every web service defined by the blueprint will be preceeded by this string. |Yes|
+
+The `url_prefix` is very useful to group all the services provided by a module with a single entry point. As istance, every service provided by the Geobricks MODIS plug-in will be introduced by the `/browse/modis` prefix. The next table shows how the URL's are modified by the prefix.
+
+|Original URL|Prefix|REST Engine URL|
+|------------|------|---------------|
+|http://www.example.com/|/browse/modis/|http://www.example.com/|
+|http://www.example.com/MOD13Q1/|/browse/modis/|http://www.example.com/MOD13Q1/|
