@@ -16,6 +16,9 @@ The REST engine can be easilly configured through a simple [settings file](https
 ```
 The following table provides a description of each parameter of the configuration objects.
 
-|Parameter Name|Description|Mandatory|
+|Name|Description|Mandatory|
 |--------------|-----------|:-------:|
 |description|Human readable description. This parameter is only used to make the configuration file more comprehensible and easy to mantain.|No|
+!path_to_the_blueprint|The import path to the Python file which contains the blueprint.|Yes|
+|blueprint_name|The name of the blueprint variable.|Yes|
+|url_prefix|Every web service defined by the blueprint will be preceeded by this string. |Yes|
