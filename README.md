@@ -15,6 +15,7 @@ The REST engine can be easilly configured through a simple [settings file](https
 }
 ```
 The following table provides a description of each parameter of the configuration objects.
+
 |Parameter Name|Description|Mandatory|
-|--------------|-----------|---------|
+|--------------|-----------|:-------:|
 |description|Human readable description. This parameter is only used to make the configuration file more comprehensible and easy to mantain.|No|
