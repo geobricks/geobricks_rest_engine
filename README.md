@@ -27,5 +27,5 @@ The `url_prefix` is very useful to group all the services provided by a module w
 
 |Original URL|Prefix|REST Engine URL|
 |------------|------|---------------|
-|http://www.example.com/|/browse/modis/|http://www.example.com/browse/modis/|
-|http://www.example.com/MOD13Q1/|/browse/modis/|http://www.example.com/browse/modis/MOD13Q1/|
+|http://example.com/|/browse/modis/|http://example.com/browse/modis/|
+|http://example.com/MOD13Q1/|/browse/modis/|http://example.com/browse/modis/MOD13Q1/|
