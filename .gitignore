@@ -1,2 +1,4 @@
 *.iml
 *.pyc
+/dist/
+/GeobricksRESTEngine.egg-info/
