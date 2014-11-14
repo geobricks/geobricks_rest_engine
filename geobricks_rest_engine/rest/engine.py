@@ -1,5 +1,9 @@
+import json
 import logging
+import urllib2
 from flask import Flask
+from flask import request
+from flask import Response
 from flask.ext.cors import CORS
 from importlib import import_module
 from flask.ext.cors import cross_origin
@@ -12,11 +16,32 @@ app = Flask(__name__)
 # Initialize CORS filters
 cors = CORS(app, resources={r'/*': {'origins': '*'}})
 
-# Root REST
 @app.route('/')
 @cross_origin(origins='*')
 def root():
+    """
+    Root REST service.
+    @return: Welcome message.
+    """
     return 'Welcome to Geobricks!'
+
+@app.route('/discovery/')
+@cross_origin(origins='*')
+def discovery():
+    """
+    Discovery service to list all the available Geobricks plug-ins.
+    @return: List of objects describing the plug-in: name, description and type.
+    """
+    rules = []
+    for r in app.url_map.iter_rules():
+        rule_name = str(r)
+        if '.' in r.endpoint and rule_name.endswith('/') and 'discovery' in rule_name:
+            discovery_url = request.host_url + rule_name[1:]
+            plugin_description = json.load(urllib2.urlopen(discovery_url))
+            if 'DATASOURCE' in plugin_description['type'].upper():
+                rules.append(plugin_description)
+    rules.sort()
+    return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
 # Dynamic import of modules specified in config.settings.py
 for module in settings['modules']:
