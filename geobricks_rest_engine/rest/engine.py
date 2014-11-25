@@ -7,7 +7,8 @@ from flask import Response
 from flask.ext.cors import CORS
 from importlib import import_module
 from flask.ext.cors import cross_origin
-from geobricks_rest_engine.config.settings import settings
+from geobricks_rest_engine.config.rest_settings import settings as rest_settings
+from geobricks_rest_engine.config.common_settings import settings as common_settings
 
 
 # Initialize the Flask app
@@ -61,10 +62,15 @@ def discovery_by_type(type):
     return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
 # Dynamic import of modules specified in config.settings.py
-for module in settings['modules']:
+for module in rest_settings['modules']:
 
     # Load module
     mod = import_module(module['path_to_the_blueprint'])
+
+    # Overwrite modules settings
+    conf_mod = import_module(module['path_to_the_config'])
+    conf = getattr(conf_mod, 'config')
+    conf['target'] = common_settings['target']
 
     # Load Blueprint
     rest = getattr(mod, module['blueprint_name'])
@@ -78,4 +84,4 @@ log.setLevel(logging.ERROR)
 
 # Start Flask server
 if __name__ == '__main__':
-    app.run(host=settings['host'], port=settings['port'], debug=settings['debug'], threaded=True)
+    app.run(host=rest_settings['host'], port=rest_settings['port'], debug=rest_settings['debug'], threaded=True)
