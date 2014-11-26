@@ -20,7 +20,7 @@ log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 # Initialize CORS filters
-cors = CORS(app, resources={r'/*': {'origins': '*'}})
+cors = CORS(app, resources={r'/*': {'origins': '*', 'headers': ['Content-Type']}})
 
 # Dynamic import of modules specified in config.settings.py
 for module in rest_settings['modules']:
