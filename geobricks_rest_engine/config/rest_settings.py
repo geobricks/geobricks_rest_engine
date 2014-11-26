@@ -48,6 +48,25 @@ settings = {
             # The prefix to be used for the Blueprint
             "url_prefix": "/dbms"
 
+        },
+
+        {
+
+            # Description, not used by the code.
+            "description": "DOWNLOAD",
+
+            # The path to the Python file containing the Blueprint
+            "path_to_the_blueprint": "geobricks_downloader.rest.downloader_rest",
+
+            # The path to the Python file containing the configuration
+            "path_to_the_config": "geobricks_downloader.config.downloader_config",
+
+            # The name of the Blueprint
+            "blueprint_name": "downloader",
+
+            # The prefix to be used for the Blueprint
+            "url_prefix": "/downloader"
+
         }
 
     ]
