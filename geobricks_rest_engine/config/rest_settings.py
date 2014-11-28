@@ -65,7 +65,7 @@ settings = {
             "blueprint_name": "downloader",
 
             # The prefix to be used for the Blueprint
-            "url_prefix": "/downloader"
+            "url_prefix": "/download"
 
         }
 

@@ -30,8 +30,10 @@ for module in rest_settings['modules']:
 
     # Overwrite modules settings
     conf_mod = import_module(module['path_to_the_config'])
-    conf = getattr(conf_mod, 'config')
-    conf['common_settings'] = dict_merge(conf, common_settings)
+
+
+    # conf = conf_mod.config
+    conf_mod.config['settings'] = dict_merge(conf_mod.config, common_settings)
 
     # Load Blueprint
     rest = getattr(mod, module['blueprint_name'])
