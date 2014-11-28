@@ -6,7 +6,7 @@ settings = {
 
         # Logging configurations
         "logging": {
-            "level": logging.INFO,
+            "level": logging.ERROR,
             "format": "%(asctime)s | %(levelname)-8s | %(name)-20s | Line: %(lineno)-5d | %(message)s",
             "datefmt": "%d-%m-%Y | %H:%M:%s"
         },

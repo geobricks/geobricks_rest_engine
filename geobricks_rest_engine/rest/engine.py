@@ -16,7 +16,7 @@ from geobricks_rest_engine.core.log import logger
 log = logger(__file__)
 
 # werkzeug logging level.
-logging.getLogger('werkzeug').setLevel(logging.INFO)
+logging.getLogger('werkzeug').setLevel(logging.ERROR)
 
 # Initialize the Flask app
 app = Flask(__name__)
