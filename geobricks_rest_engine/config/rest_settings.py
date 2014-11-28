@@ -7,10 +7,27 @@ settings = {
     "host": "localhost",
 
     # Flask port: DEVELOPMENT ONLY
-    "port": 5555,
+    "port": 7777,
 
     # List of modules to be imported at the start-up.
     "modules": [
+        {
+            # Description, not used by the code.
+            "description": "Distribution",
+
+            # The path to the Python file containing the Blueprint
+            "path_to_the_blueprint": "geobricks_distribution.rest.distribution_rest",
+
+            # The path to the Python file containing the configuration
+            "path_to_the_config": "geobricks_distribution.config.config",
+
+            # The name of the Blueprint
+            # The name of the Blueprint variable in the "geobricks_distribution.rest.distribution_rest" module
+            "blueprint_name": "app",
+
+            # The prefix to be used for the Blueprint
+            "url_prefix": "/distribution"
+        },
 
         {
 

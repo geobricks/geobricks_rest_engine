@@ -10,14 +10,16 @@ from flask.ext.cors import cross_origin
 from geobricks_rest_engine.config.rest_settings import settings as rest_settings
 from geobricks_rest_engine.config.common_settings import settings as common_settings
 from geobricks_rest_engine.core.utils import dict_merge
+from geobricks_rest_engine.core.log import logger
 
+# Logger
+log = logger(__file__)
+
+# werkzeug logging level.
+logging.getLogger('werkzeug').setLevel(logging.INFO)
 
 # Initialize the Flask app
 app = Flask(__name__)
-
-# Logging level.
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
 
 # Initialize CORS filters
 cors = CORS(app, resources={r'/*': {'origins': '*', 'headers': ['Content-Type']}})
@@ -25,21 +27,23 @@ cors = CORS(app, resources={r'/*': {'origins': '*', 'headers': ['Content-Type']}
 # Dynamic import of modules specified in config.settings.py
 for module in rest_settings['modules']:
 
-    # Load module
-    mod = import_module(module['path_to_the_blueprint'])
+    try:
+        # Load module
+        mod = import_module(module['path_to_the_blueprint'])
 
-    # Overwrite modules settings
-    conf_mod = import_module(module['path_to_the_config'])
+        # Overwrite modules settings
+        conf_mod = import_module(module['path_to_the_config'])
 
+        # conf = conf_mod.config
+        conf_mod.config['settings'] = dict_merge(conf_mod.config, common_settings)
 
-    # conf = conf_mod.config
-    conf_mod.config['settings'] = dict_merge(conf_mod.config, common_settings)
+        # Load Blueprint
+        rest = getattr(mod, module['blueprint_name'])
 
-    # Load Blueprint
-    rest = getattr(mod, module['blueprint_name'])
-
-    # Register Blueprint
-    app.register_blueprint(rest, url_prefix=module['url_prefix'])
+        # Register Blueprint
+        app.register_blueprint(rest, url_prefix=module['url_prefix'])
+    except Exception, e:
+        log.error(e)
 
 @app.route('/')
 @cross_origin(origins='*')
