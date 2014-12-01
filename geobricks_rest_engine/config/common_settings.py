@@ -6,6 +6,16 @@ settings = {
 
     "settings": {
 
+
+        # To be used by Flask: DEVELOPMENT ONLY
+        "debug": True,
+
+        # Flask host: DEVELOPMENT ONLY
+        "host": "localhost",
+
+        # Flask port: DEVELOPMENT ONLY
+        "port": 5555,
+
         # Logging configurations
         "logging": {
             "level": logging.ERROR,
@@ -15,7 +25,7 @@ settings = {
 
         # Email configurations
         "email": {
-            "settings": "/home/vortex/Desktop/LAYERS/email.json",
+            "settings": "path_to_the_email.json",
             "user":  None,
             "password": None
         },
@@ -23,18 +33,25 @@ settings = {
         # Folders
         "folders": {
             "config": "config/",
-            "tmp": "/home/vortex/Desktop/LAYERS/tmp",
-            "data_providers": "data_providers/",
-            "metadata": "metadata/",
-            "stats": "stats/",
-            "geoserver": "geoserver/",
-            "metadata_templates": "metadata/templates/",
-            # used on runtime statistics (for Published layers this is the Geoservers Cluster "datadir")
-            "geoserver_datadir": "/home/vortex/programs/SERVERS/tomcat_geoservers/data/",
-            #"geoserver_datadir": "/home/vortex/Desktop/LAYERS/GEOSERVER_TEST",
-
-            "distribution": "/home/vortex/Desktop/LAYERS/DISTRIBUTION/"
+            "tmp": "tmp_path",
+            "geoserver_datadir": "geoserver_data_folder",
+            "distribution": "distribution_folder",
+            "ftp": "ftp_folder"
         },
+
+        "db": {
+            # Spatial Database
+            "spatial": {
+                # default_db will search in the dbs["database"] as default option
+                "dbname": "dbname",
+                "host": "hostname",
+                "port": "5432",
+                "username": "user",
+                "password": "pwd",
+                "schema": "public"
+            }
+        },
+
 
         # Downloads
         "target_root": "/home/kalimaha/Desktop/GIS/MODIS",
@@ -83,16 +100,7 @@ settings = {
 
         "subfolders": {
             "output": "OUTPUT"
-        },
-
-        # To be used by Flask: DEVELOPMENT ONLY
-        "debug": True,
-
-        # Flask host: DEVELOPMENT ONLY
-        "host": "localhost",
-
-        # Flask port: DEVELOPMENT ONLY
-        "port": 5555
+        }
     }
 }
 
