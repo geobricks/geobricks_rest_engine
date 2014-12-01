@@ -16,7 +16,7 @@ from geobricks_rest_engine.core.log import logger
 log = logger(__file__)
 
 # werkzeug logging level.
-logging.getLogger('werkzeug').setLevel(logging.ERROR)
+logging.getLogger('werkzeug').setLevel(logging.INFO)
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -35,7 +35,8 @@ for module in rest_settings['modules']:
         conf_mod = import_module(module['path_to_the_config'])
 
         # conf = conf_mod.config
-        conf_mod.config['settings'] = dict_merge(conf_mod.config, common_settings)
+        conf_mod.config["settings"] = dict_merge(conf_mod.config, common_settings)
+        conf_mod.config["settings"] = conf_mod.config["settings"]["settings"]
 
         # Load Blueprint
         rest = getattr(mod, module['blueprint_name'])
