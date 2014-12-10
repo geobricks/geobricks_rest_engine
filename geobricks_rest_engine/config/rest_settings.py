@@ -13,6 +13,12 @@ settings = {
     "modules": [
         {
             # Description, not used by the code.
+            "description": "gis_raster",
+            # The path to the Python file containing the configuration
+            "path_to_the_config": "geobricks_gis_raster.config.config",
+        },
+        {
+            # Description, not used by the code.
             "description": "Geocoding",
 
             # The path to the Python file containing the Blueprint
