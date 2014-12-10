@@ -35,14 +35,18 @@ for module in rest_settings['modules']:
         conf_mod = import_module(module['path_to_the_config'])
 
         # conf = conf_mod.config
-        conf_mod.config["settings"] = dict_merge(common_settings, conf_mod.config)
+        #conf_mod.config["settings"] = dict_merge(common_settings, conf_mod.config)
+        conf_mod.config["settings"] = dict_merge(conf_mod.config, common_settings)
         conf_mod.config["settings"] = conf_mod.config["settings"]["settings"]
+
+        log.info(conf_mod.config["settings"])
 
         # Load Blueprint
         rest = getattr(mod, module['blueprint_name'])
 
         # Register Blueprint
         app.register_blueprint(rest, url_prefix=module['url_prefix'])
+        log.error("Module loaded: " + module['path_to_the_blueprint'])
     except Exception, e:
         log.error(e)
 

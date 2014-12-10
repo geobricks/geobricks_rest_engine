@@ -6,6 +6,8 @@ settings = {
 
     "settings": {
 
+        # base url used by nginx
+        "base_url": "", #(i.e. "demo/geo/ghg/"),
 
         # To be used by Flask: DEVELOPMENT ONLY
         "debug": True,
@@ -30,13 +32,15 @@ settings = {
             "password": None
         },
 
+
         # Folders
         "folders": {
-            "config": "config/",
             "tmp": "tmp_path",
             "geoserver_datadir": "geoserver_data_folder",
             "distribution": "distribution_folder",
-            "ftp": "ftp_folder"
+            "ftp": "ftp_folder",
+            # this is used by the filesystem to get the (published) layers in the file system
+            "workspace_layer_separator": "@"
         },
 
         "db": {

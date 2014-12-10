@@ -3,3 +3,5 @@ v0.1.1, 14-11-2014 -- Updated rest config module.
 v0.1.2, 01-12-2014 -- Updated version.
 v0.1.3, 01-12-2014 -- Updated MANIFEST.in.
 v0.1.4, 01-12-2014 -- fixed setup.py settings.
+v0.1.5, 10-12-2014 -- fixed setup.py settings.
+v0.1.6, 10-12-2014 -- Added configuration settings.
