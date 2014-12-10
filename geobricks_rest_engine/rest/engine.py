@@ -35,7 +35,7 @@ for module in rest_settings['modules']:
         conf_mod = import_module(module['path_to_the_config'])
 
         # conf = conf_mod.config
-        conf_mod.config["settings"] = dict_merge(conf_mod.config, common_settings)
+        conf_mod.config["settings"] = dict_merge(common_settings, conf_mod.config)
         conf_mod.config["settings"] = conf_mod.config["settings"]["settings"]
 
         # Load Blueprint
