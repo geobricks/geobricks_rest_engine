@@ -25,11 +25,10 @@ settings = {
             "datefmt": "%d-%m-%Y | %H:%M:%s"
         },
 
-        # Email configurations
+        # Email configurations (for now uses gmail as default client)
         "email": {
-            "settings": "path_to_the_email.json",
-            "user":  None,
-            "password": None
+            "user":  "user",
+            "password": "password"
         },
 
 
@@ -47,11 +46,11 @@ settings = {
             # Spatial Database
             "spatial": {
                 # default_db will search in the dbs["database"] as default option
-                "dbname": "dbname",
-                "host": "hostname",
+                "dbname": "fenix",
+                "host": "localhost",
                 "port": "5432",
-                "username": "user",
-                "password": "pwd",
+                "username": "fenix",
+                "password": "Qwaszx",
                 "schema": "public"
             }
         },
