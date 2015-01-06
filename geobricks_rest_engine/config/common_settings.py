@@ -24,10 +24,10 @@ settings = {
 
         # Folders
         "folders": {
-            "tmp": "/home/vortex/Desktop/geobricks/tmp",
+            "tmp": "/home/vortex/Desktop/LAYERS/geobricks/tmp/",
             "geoserver_datadir": "/home/vortex/programs/SERVERS/tomcat_geoservers/geoserver_data_2_5_3/data/",
-            "distribution": "/home/vortex/Desktop/geobricks/distribution",
-            "ftp": "/home/vortex/Desktop/geobricks/ftp",
+            "distribution": "/home/vortex/Desktop/LAYERS/geobricks/distribution",
+            "storage": "/home/vortex/Desktop/LAYERS/geobricks/storage/",
             # this is used by the filesystem to get the (published) layers in the file system
             "workspace_layer_separator": ":"
         },
@@ -41,12 +41,12 @@ settings = {
                 "host": "localhost",
                 "port": "5432",
                 "username": "user",
-                "password": "password",
+                "password": "passwrod",
                 "schema": "public"
             }
         },
 
-        # Storage remote Configuration
+        # Storage remove Configuration
         "storage": {
             "url": "localhost",
             "user": "user",
