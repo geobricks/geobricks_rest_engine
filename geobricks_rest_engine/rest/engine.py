@@ -31,16 +31,10 @@ for module in rest_settings['modules']:
         try:
             # Overwrite modules settings
             conf_mod = import_module(module['path_to_the_config'])
-
-            # conf = conf_mod.config
-            #conf_mod.config["settings"] = dict_merge(common_settings, conf_mod.config)
             conf_mod.config["settings"] = dict_merge(conf_mod.config, common_settings)
-
             conf_mod.config["settings"] = conf_mod.config["settings"]["settings"]
-            log.info(conf_mod.config["settings"])
         except Exception, e:
-            log.error(e)
-
+            log.warning(e)
 
         try:
             # Load module
@@ -51,11 +45,11 @@ for module in rest_settings['modules']:
 
             # Register Blueprint
             app.register_blueprint(rest, url_prefix=module['url_prefix'])
-            log.error("Module loaded: " + module['path_to_the_blueprint'])
+            log.info("Module loaded: " + module['path_to_the_blueprint'])
         except Exception, e:
-            log.error(e)
+            log.warning(e)
     except Exception, e:
-        log.error(e)
+        log.warning(e)
 
 @app.route('/')
 @cross_origin(origins='*')
@@ -104,5 +98,4 @@ def discovery_by_type(type):
 
 # Start Flask server
 if __name__ == '__main__':
-    print rest_settings
     app.run(host=rest_settings['host'], port=rest_settings['port'], debug=rest_settings['debug'], threaded=True)

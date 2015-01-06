@@ -4,7 +4,7 @@ settings = {
     "debug": True,
 
     # Flask host: DEVELOPMENT ONLY
-    "host": "168.202.28.214",
+    "host": "localhost",
 
     # Flask port: DEVELOPMENT ONLY
     "port": 7777,
@@ -34,7 +34,6 @@ settings = {
             # The prefix to be used for the Blueprint
             "url_prefix": "/geocoding"
         },
-
         {
             # Description, not used by the code.
             "description": "Metadata Manager",

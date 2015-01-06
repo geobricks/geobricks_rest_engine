@@ -9,18 +9,9 @@ settings = {
         # base url used by nginx
         "base_url": "", #(i.e. "demo/geo/ghg/"),
 
-        # To be used by Flask: DEVELOPMENT ONLY
-        "debug": True,
-
-        # Flask host: DEVELOPMENT ONLY
-        "host": "localhost",
-
-        # Flask port: DEVELOPMENT ONLY
-        "port": 5555,
-
         # Logging configurations
         "logging": {
-            "level": logging.ERROR,
+            "level": logging.INFO,
             "format": "%(asctime)s | %(levelname)-8s | %(name)-20s | Line: %(lineno)-5d | %(message)s",
             "datefmt": "%d-%m-%Y | %H:%M:%s"
         },
@@ -31,17 +22,17 @@ settings = {
             "password": "password"
         },
 
-
         # Folders
         "folders": {
-            "tmp": "tmp_path",
-            "geoserver_datadir": "geoserver_data_folder",
-            "distribution": "distribution_folder",
-            "ftp": "ftp_folder",
+            "tmp": "/home/vortex/Desktop/geobricks/tmp",
+            "geoserver_datadir": "/home/vortex/programs/SERVERS/tomcat_geoservers/geoserver_data_2_5_3/data/",
+            "distribution": "/home/vortex/Desktop/geobricks/distribution",
+            "ftp": "/home/vortex/Desktop/geobricks/ftp",
             # this is used by the filesystem to get the (published) layers in the file system
-            "workspace_layer_separator": "@"
+            "workspace_layer_separator": ":"
         },
 
+        # Database
         "db": {
             # Spatial Database
             "spatial": {
@@ -49,71 +40,37 @@ settings = {
                 "dbname": "fenix",
                 "host": "localhost",
                 "port": "5432",
-                "username": "fenix",
-                "password": "Qwaszx",
+                "username": "user",
+                "password": "password",
                 "schema": "public"
             }
         },
 
-        # metdata settings
+        # Storage remote Configuration
+        "storage": {
+            "url": "localhost",
+            "user": "user",
+            "password": "password"
+        },
+
+        # Metadata settings
         "metadata": {
-            "url_create_metadata": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/metadata",
-            "url_get_metadata_uid": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
+            "url_create_metadata": "http://fenix.fao.org/d3s_dev/resources/metadata",
+            "url_get_metadata_uid": "http://fenix.fao.org/d3s_dev/resources/metadata/uid/<uid>?full=true&dsd=true",
             # get metadata
-            "url_get_metadata": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/metadata/uid/<uid>",
-            "url_get_full_metadata": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
+            "url_get_metadata": "http://fenix.fao.org/d3s_dev/resources/metadata/uid/<uid>",
+            "url_get_full_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
             # coding system
-            "url_create_coding_system": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources",
-            "url_data_coding_system": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/data/uid/<uid>",
+            "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources",
+            "url_data_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources/data/uid/<uid>",
         },
 
-        # Downloads
-        "target_root": "/home/kalimaha/Desktop/GIS/MODIS",
-        "target": {
-            "folders": [
-                {
-                    "folder_name": "{{product}}",
-                    "folders": [
-                        {
-                            "folder_name": "{{year}}",
-                            "folders": [
-                                {
-                                    "folder_name": "{{day}}"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "bands": [
-                {
-                    "index": 1,
-                    "label": "NDVI"
-                },
-                {
-                    "index": 2,
-                    "label": "EVI"
-                }
-            ],
-            "subfolders": {
-                "output": "OUTPUT"
-            }
-        },
-
-        # FIXME: it depends on the product...
-        "bands": [
-            {
-                "index": 1,
-                "label": "NDVI"
-            },
-            {
-                "index": 2,
-                "label": "EVI"
-            }
-        ],
-
-        "subfolders": {
-            "output": "OUTPUT"
+        # Geoserver settings
+        "geoserver": {
+            "geoserver_master": "http://localhost:9090/geoserver/rest",
+            "geoserver_slaves": [],
+            "username": "admin",
+            "password": "geoserver",
         }
     }
 }
@@ -121,6 +78,7 @@ settings = {
 
 # Setting email adderess from configuration file
 def set_email_settings():
-    if os.path.isfile(settings["settings"]["email"]["settings"]):
-        settings["settings"]["email"] = json.loads(open(settings["settings"]["email"]["settings"]).read())
+    if "email" in settings["settings"]:
+        if "settings" in settings["settings"]["email"] and os.path.isfile(settings["settings"]["email"]["settings"]):
+            settings["settings"]["email"] = json.loads(open(settings["settings"]["email"]["settings"]).read())
 set_email_settings()
