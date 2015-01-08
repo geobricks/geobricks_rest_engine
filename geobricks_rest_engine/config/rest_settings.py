@@ -35,6 +35,9 @@ settings = {
             "url_prefix": "/geocoding"
         },
         {
+            # Name of the service (used to retrieve a service by name)
+            "name": "spatialquery",
+
             # Description, not used by the code.
             "description": "SpatialQuery",
 

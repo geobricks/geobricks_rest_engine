@@ -77,6 +77,22 @@ def discovery():
     rules.sort()
     return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
+
+@app.route('/discovery/service/url/name/<name>')
+@cross_origin(origins='*')
+def discovery_by_name(name):
+    """
+    Discovery service url by name
+    @return: List of objects describing the plug-in: name, description and type.
+    """
+    result = {}
+    for module in rest_settings["modules"]:
+        if "name" in module:
+            if module["name"] == name:
+                result["url"] = request.host_url + common_settings["settings"]["base_url"] + module["url_prefix"]
+    return Response(json.dumps(result), content_type='application/json; charset=utf-8')
+
+
 @app.route('/discovery/<type>/')
 @cross_origin(origins='*')
 def discovery_by_type(type):
