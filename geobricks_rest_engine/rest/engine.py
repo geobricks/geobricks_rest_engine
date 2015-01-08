@@ -78,18 +78,23 @@ def discovery():
     return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
 
-@app.route('/discovery/service/url/name/<name>')
+@app.route('/discovery/service/url/name/<name>/')
 @cross_origin(origins='*')
 def discovery_by_name(name):
     """
     Discovery service url by name
-    @return: List of objects describing the plug-in: name, description and type.
+    @return: List the url to call the service
     """
     result = {}
-    for module in rest_settings["modules"]:
-        if "name" in module:
-            if module["name"] == name:
-                result["url"] = request.host_url + common_settings["settings"]["base_url"] + module["url_prefix"]
+    for r in app.url_map.iter_rules():
+        rule_name = str(r)
+        if '.' in r.endpoint and rule_name.endswith('/') and 'discovery' in rule_name:
+            discovery_url = request.host_url + rule_name[1:]
+            print discovery_url
+            plugin_description = json.load(urllib2.urlopen(discovery_url))
+            if "name" in plugin_description:
+                if plugin_description["name"] == name:
+                    result["url"] = (request.host_url + rule_name[1:]).replace("discovery/", "")
     return Response(json.dumps(result), content_type='application/json; charset=utf-8')
 
 
