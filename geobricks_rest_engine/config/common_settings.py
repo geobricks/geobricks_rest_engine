@@ -6,7 +6,7 @@ settings = {
 
     "settings": {
 
-        # base url used by nginx
+        # base url used by NGINX
         "base_url": "", #(i.e. "demo/geo/ghg/"),
 
         # Logging configurations
@@ -41,9 +41,45 @@ settings = {
                 "host": "localhost",
                 "port": "5432",
                 "username": "user",
-                "password": "passwrod",
-                "schema": "public"
-            }
+                "password": "password",
+                "schema": "public",
+
+                # TODO: move to the metadata DB? layers to be used as default ones
+                "tables": {
+                    # bbox
+                    "country": {
+
+                        # table mapped in the database
+                        "table": "gaul0_2015_4326",
+
+                        # alias to use in the columns
+                        "column": {
+                            "code": "adm0_name",
+                            "label": "adm0_name",
+                            "adm0_code": "adm0_code",
+                            "iso2": "iso2",
+                            "iso3": "iso3",
+
+                            # geometry column
+                            "geom": "geom"
+                        },
+
+                        # srid used TODO: better projection?
+                        "srid": "4326",
+                    },
+                    "gaul0": {
+                        "table": "gaul0_2015_4326",
+                        "column_grom": "geom",
+                        "srid": "4326"
+                    },
+                    "gaul1": {
+                        "table": "gaul1_2015_4326",
+                        "column_grom": "geom",
+                        "srid": "4326"
+                    }
+                }
+            },
+
         },
 
         # Storage remove Configuration
