@@ -24,10 +24,10 @@ settings = {
 
         # Folders
         "folders": {
-            "tmp": "/home/vortex/Desktop/LAYERS/geobricks/tmp/",
-            "geoserver_datadir": "/home/vortex/programs/SERVERS/tomcat_geoservers/geoserver_data_2_5_3/data/",
-            "distribution": "/home/vortex/Desktop/LAYERS/geobricks/distribution",
-            "storage": "/home/vortex/Desktop/LAYERS/geobricks/storage/",
+            "tmp": "/tmp/",
+            "geoserver_datadir": "geoserver_data_dir/",
+            "distribution": "distribution/",
+            "storage": "storage/",
             # this is used by the filesystem to get the (published) layers in the file system
             "workspace_layer_separator": ":"
         },
@@ -37,47 +37,12 @@ settings = {
             # Spatial Database
             "spatial": {
                 # default_db will search in the dbs["database"] as default option
-                "dbname": "fenix",
+                "dbname": "db",
                 "host": "localhost",
                 "port": "5432",
                 "username": "user",
                 "password": "pwd",
                 "schema": "public",
-
-                # TODO: move to the metadata DB? layers to be used as default ones
-                "tables": {
-                    # bbox
-                    "country": {
-
-                        # table mapped in the database
-                        "table": "gaul0_2015_4326",
-
-                        # alias to use in the columns
-                        "column": {
-                            "code": "adm0_name",
-                            "label": "adm0_name",
-                            "adm0_code": "adm0_code",
-                            "iso2": "iso2",
-                            "iso3": "iso3",
-
-                            # geometry column
-                            "geom": "geom"
-                        },
-
-                        # srid used TODO: better projection?
-                        "srid": "4326",
-                    },
-                    "gaul0": {
-                        "table": "gaul0_2015_4326",
-                        "column_grom": "geom",
-                        "srid": "4326"
-                    },
-                    "gaul1": {
-                        "table": "gaul1_2015_4326",
-                        "column_grom": "geom",
-                        "srid": "4326"
-                    }
-                }
             },
         },
 
@@ -90,22 +55,22 @@ settings = {
 
         # Metadata settings
         "metadata": {
-            "url_create_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata",
-            "url_get_metadata_uid": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
+            "url_create_metadata": "//localhost/d3s_dev/msd/resources/metadata",
+            "url_get_metadata_uid": "//localhost/d3s_dev/msd/resources/metadata/uid/<uid>",
 
             # delete metadata
-            "url_delete_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
+            "url_delete_metadata": "//localhost/d3s_dev/msd/resources/metadata/uid/<uid>",
 
             # get metadata
-            "url_get_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/find",
-            "url_get_metadata_full": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
+            "url_get_metadata": "//localhost/d3s_dev/msd/resources/find",
+            "url_get_metadata_full": "//localhost/d3s_dev/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
 
             # coding system
-            "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources",
-            "url_data_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources/data/uid/<uid>",
+            "url_create_coding_system": "//localhost/d3s_dev/msd/resources",
+            "url_data_coding_system": "//localhost/d3s_dev/msd/resources/data/uid/<uid>",
 
             # DSD
-            "url_overwrite_dsd_rid": "http://fenix.fao.org/d3s_dev/msd/resources/dsd"
+            "url_overwrite_dsd_rid": "//localhost/d3s_dev/msd/resources/dsd"
         },
 
         # Geoserver settings
