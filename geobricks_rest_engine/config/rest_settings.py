@@ -16,6 +16,16 @@ settings = {
             "description": "geobricks_common",
             # The path to the Python file containing the configuration
             "path_to_the_config": "geobricks_common.config.config",
+
+            # The path to the Python file containing the Blueprint
+            "path_to_the_blueprint": "geobricks_common.rest.common_rest",
+
+            # The name of the Blueprint
+            # The name of the Blueprint variable in the "geobricks_distribution.rest.distribution_rest" module
+            "blueprint_name": "app",
+
+            # The prefix to be used for the Blueprint
+            "url_prefix": "/common"
         },
         {
             # Description, not used by the code.
@@ -23,6 +33,12 @@ settings = {
             # The path to the Python file containing the configuration
             "path_to_the_config": "geobricks_gis_raster.config.config",
         },
+        {
+            # Description, not used by the code.
+            "description": "gis_vector",
+            # The path to the Python file containing the configuration
+            "path_to_the_config": "geobricks_gis_vector.config.config",
+            },
         {
             # Description, not used by the code.
             "description": "Geocoding",
