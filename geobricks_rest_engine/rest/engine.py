@@ -26,7 +26,6 @@ cors = CORS(app, resources={r'/*': {'origins': '*', 'headers': ['Content-Type']}
 
 # Dynamic import of modules specified in config.settings.py
 for module in rest_settings['modules']:
-
     try:
         try:
             # Overwrite modules settings

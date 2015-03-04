@@ -4,10 +4,10 @@ settings = {
     "debug": True,
 
     # Flask host: DEVELOPMENT ONLY
-    "host": "localhost",
+    "host": "168.202.28.57",
 
     # Flask port: DEVELOPMENT ONLY
-    "port": 7777,
+    "port": 5555,
 
     # List of modules to be imported at the start-up.
     "modules": [
@@ -29,104 +29,20 @@ settings = {
         },
         {
             # Description, not used by the code.
-            "description": "gis_raster",
+            "description": "geobricks_processing",
             # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_gis_raster.config.config",
-        },
-        {
-            # Description, not used by the code.
-            "description": "gis_vector",
-            # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_gis_vector.config.config",
-            },
-        {
-            # Description, not used by the code.
-            "description": "Geocoding",
+            "path_to_the_config": "geobricks_processing.config.config",
 
             # The path to the Python file containing the Blueprint
-            "path_to_the_blueprint": "geobricks_geocoding.rest.geocoding_rest",
-
-            # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_geocoding.config.config",
+            "path_to_the_blueprint": "geobricks_processing.rest.processing_rest",
 
             # The name of the Blueprint
             # The name of the Blueprint variable in the "geobricks_distribution.rest.distribution_rest" module
             "blueprint_name": "app",
 
             # The prefix to be used for the Blueprint
-            "url_prefix": "/geocoding"
+            "url_prefix": "/processing"
         },
-        {
-            # Description, not used by the code.
-            "description": "SpatialQuery",
-
-            # The path to the Python file containing the Blueprint
-            "path_to_the_blueprint": "geobricks_spatial_query.rest.spatial_query_rest",
-
-            # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_spatial_query.config.config",
-
-            # The name of the Blueprint
-            # The name of the Blueprint variable in the "geobricks_distribution.rest.distribution_rest" module
-            "blueprint_name": "app",
-
-            # The prefix to be used for the Blueprint
-            "url_prefix": "/spatialquery"
-        },
-        {
-            # Description, not used by the code.
-            "description": "Metadata Manager",
-
-            # The path to the Python file containing the Blueprint
-            "path_to_the_blueprint": "geobricks_metadata_manager.rest.metadata_manager_rest",
-
-            # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_metadata_manager.config.config",
-
-            # The name of the Blueprint
-            # The name of the Blueprint variable in the "geobricks_distribution.rest.distribution_rest" module
-            "blueprint_name": "app",
-
-            # The prefix to be used for the Blueprint
-            "url_prefix": "/metadata"
-        },
-
-        {
-            # Description, not used by the code.
-            "description": "Distribution",
-
-            # The path to the Python file containing the Blueprint
-            "path_to_the_blueprint": "geobricks_distribution.rest.distribution_rest",
-
-            # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_distribution.config.config",
-
-            # The name of the Blueprint
-            # The name of the Blueprint variable in the "geobricks_distribution.rest.distribution_rest" module
-            "blueprint_name": "app",
-
-            # The prefix to be used for the Blueprint
-            "url_prefix": "/distribution"
-        },
-
-        {
-            # Description, not used by the code.
-            "description": "Geostatistics",
-
-            # The path to the Python file containing the Blueprint
-            "path_to_the_blueprint": "geobricks_geostatistics.rest.geostatistics_rest",
-
-            # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_geostatistics.config.config",
-
-            # The name of the Blueprint
-            # The name of the Blueprint variable in the "geobricks_distribution.rest.distribution_rest" module
-            "blueprint_name": "app",
-
-            # The prefix to be used for the Blueprint
-            "url_prefix": "/geostatistics"
-        },
-
         {
 
             # Description, not used by the code.
@@ -145,26 +61,6 @@ settings = {
             "url_prefix": "/browse/modis"
 
         },
-
-        {
-
-            # Description, not used by the code.
-            "description": "DBMS",
-
-            # The path to the Python file containing the Blueprint
-            "path_to_the_blueprint": "geobricks_dbms.rest.dbms_rest",
-
-            # The path to the Python file containing the configuration
-            "path_to_the_config": "geobricks_dbms.config.dbms_config",
-
-            # The name of the Blueprint
-            "blueprint_name": "dbms",
-
-            # The prefix to be used for the Blueprint
-            "url_prefix": "/dbms"
-
-        },
-
         {
 
             # Description, not used by the code.
@@ -183,7 +79,6 @@ settings = {
             "url_prefix": "/download"
 
         }
-
     ]
 
 }
