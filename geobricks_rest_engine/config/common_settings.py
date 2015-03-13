@@ -18,7 +18,7 @@ settings = {
 
         # Email configurations (for now uses gmail as default client)
         "email": {
-            "user":  "user",
+            "user": "user",
             "password": "password"
         },
 
@@ -40,46 +40,11 @@ settings = {
                 "dbname": "fenix",
                 "host": "localhost",
                 "port": "5432",
-                "username": "fenix",
-                "password": "Qwaszx",
-                "schema": "spatial",
-
-                # TODO: move to the metadata DB? layers to be used as default ones
-                "tables": {
-                    # bbox
-                    "country": {
-
-                        # table mapped in the database
-                        "table": "gaul0_2015_4326",
-
-                        # alias to use in the columns
-                        "column": {
-                            "code": "adm0_name",
-                            "label": "adm0_name",
-                            "adm0_code": "adm0_code",
-                            "iso2": "iso2",
-                            "iso3": "iso3",
-
-                            # geometry column
-                            "geom": "geom"
-                        },
-
-                        # srid used TODO: better projection?
-                        "srid": "4326",
-                        },
-                    "gaul0": {
-                        "table": "gaul0_2015_4326",
-                        "column_grom": "geom",
-                        "srid": "4326"
-                    },
-                    "gaul1": {
-                        "table": "gaul1_2015_4326",
-                        "column_grom": "geom",
-                        "srid": "4326"
-                    }
-                }
+                "username": "user",
+                "password": "pwd",
+                "schema": "schema"
             },
-            },
+        },
 
         # Storage remove Configuration
         "storage": {
@@ -90,22 +55,7 @@ settings = {
 
         # Metadata settings
         "metadata": {
-            "url_create_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata",
-            "url_get_metadata_uid": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
 
-            # delete metadata
-            "url_delete_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
-
-            # get metadata
-            "url_get_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/find",
-            "url_get_metadata_full": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
-
-            # coding system
-            "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources",
-            "url_data_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources/data/uid/<uid>",
-
-            # DSD
-            "url_overwrite_dsd_rid": "http://fenix.fao.org/d3s_dev/msd/resources/dsd"
         },
 
         # Geoserver settings
