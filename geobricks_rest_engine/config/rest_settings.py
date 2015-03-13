@@ -4,7 +4,7 @@ settings = {
     "debug": True,
 
     # Flask host: DEVELOPMENT ONLY
-    "host": "168.202.28.57",
+    "host": "localhost",
 
     # Flask port: DEVELOPMENT ONLY
     "port": 5555,

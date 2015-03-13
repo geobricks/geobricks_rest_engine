@@ -24,31 +24,34 @@ app = Flask(__name__)
 # Initialize CORS filters
 cors = CORS(app, resources={r'/*': {'origins': '*', 'headers': ['Content-Type']}})
 
+
 # Dynamic import of modules specified in config.settings.py
-for module in rest_settings['modules']:
-    try:
-        try:
-            # Overwrite modules settings
-            conf_mod = import_module(module['path_to_the_config'])
-            conf_mod.config["settings"] = dict_merge(conf_mod.config, common_settings)
-            conf_mod.config["settings"] = conf_mod.config["settings"]["settings"]
-        except Exception, e:
-            log.warning(e)
+def load_modules():
+    for module in rest_settings['modules']:
 
         try:
-            # Load module
-            mod = import_module(module['path_to_the_blueprint'])
+            try:
+                # Overwrite modules settings
+                conf_mod = import_module(module['path_to_the_config'])
+                conf_mod.config["settings"] = dict_merge(conf_mod.config, common_settings)
+                conf_mod.config["settings"] = conf_mod.config["settings"]["settings"]
+            except Exception, e:
+                log.warning(e)
 
-            # Load Blueprint
-            rest = getattr(mod, module['blueprint_name'])
+            try:
+                # Load module
+                mod = import_module(module['path_to_the_blueprint'])
 
-            # Register Blueprint
-            app.register_blueprint(rest, url_prefix=module['url_prefix'])
-            log.info("Module loaded: " + module['path_to_the_blueprint'])
+                # Load Blueprint
+                rest = getattr(mod, module['blueprint_name'])
+
+                # Register Blueprint
+                app.register_blueprint(rest, url_prefix=module['url_prefix'])
+                log.info("Module loaded: " + module['path_to_the_blueprint'])
+            except Exception, e:
+                log.warning(e)
         except Exception, e:
             log.warning(e)
-    except Exception, e:
-        log.warning(e)
 
 @app.route('/')
 @cross_origin(origins='*')
@@ -118,4 +121,7 @@ def discovery_by_type(type):
 
 # Start Flask server
 if __name__ == '__main__':
+    # load modules
+    load_modules()
+    # load REST engine
     app.run(host=rest_settings['host'], port=rest_settings['port'], debug=rest_settings['debug'], threaded=True)
