@@ -119,9 +119,13 @@ def discovery_by_type(type):
     return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
 
+def run_engine():
+    app.run(host=rest_settings['host'], port=rest_settings['port'], debug=rest_settings['debug'], threaded=True)
+
+
 # Start Flask server
 if __name__ == '__main__':
     # load modules
     load_modules()
-    # load REST engine
-    app.run(host=rest_settings['host'], port=rest_settings['port'], debug=rest_settings['debug'], threaded=True)
+    # run REST engine
+    run_engine()
