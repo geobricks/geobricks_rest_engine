@@ -191,7 +191,6 @@ settings = {
 
         },
         {
-
             # Description, not used by the code.
             "description": "DOWNLOAD",
 
@@ -206,7 +205,6 @@ settings = {
 
             # The prefix to be used for the Blueprint
             "url_prefix": "/download"
-
         }
     ]
 }
