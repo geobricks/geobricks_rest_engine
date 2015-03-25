@@ -4,7 +4,7 @@
       "en": "REST Engine"
    },
    "language": "Python",
-   "description": "Geobricks REST Engine.",
+   "description": "This module works as coordinator for all the Geobricks REST services and it is in charge of configuration override of each module.",
    "license": "GPL2",
    "homepage": "http://geobricks.org/",
    "keywords": [
