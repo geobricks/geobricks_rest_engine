@@ -8,3 +8,5 @@ v0.1.6, 10-12-2014 -- Added configuration settings.
 v0.1.7, 10-12-2014 -- Added import of non-rest modules.
 v0.1.8, 13-01-2015 -- Added import of non-rest modules.
 v0.1.9, 16-03-2015 -- Added import of non-rest modules.
+v0.1.10, 01-04-2015 -- Added import of non-rest modules.
+v0.1.11, 01-04-2015 -- Added import of non-rest modules.

@@ -27,6 +27,7 @@ settings = {
             "tmp": "/home/vortex/Desktop/LAYERS/geobricks/tmp/",
             "geoserver_datadir": "/home/vortex/programs/SERVERS/tomcat_geoservers/data/",
             "distribution": "/home/vortex/Desktop/LAYERS/geobricks/distribution",
+            "distribution_sld": "/home/vortex/repos/FENIX-MAPS/geobricks/geobricks_sld/distribution_sld/",
             "storage": "/home/vortex/Desktop/LAYERS/geobricks/storage/",
             # this is used by the filesystem to get the (published) layers in the file system
             "workspace_layer_separator": ":"

@@ -27,7 +27,7 @@ cors = CORS(app, resources={r'/*': {'origins': '*', 'headers': ['Content-Type']}
 
 # Dynamic import of modules specified in config.settings.py
 def load_modules():
-    for module in rest_settings['modules']:
+    for module in rest_settings['settings']['modules']:
 
         try:
             try:
@@ -120,12 +120,13 @@ def discovery_by_type(type):
 
 
 def run_engine():
-    app.run(host=rest_settings['host'], port=rest_settings['port'], debug=rest_settings['debug'], threaded=True)
+    # load modules
+    load_modules()
+    # load REST engine
+    app.run(host=rest_settings['settings']['host'], port=rest_settings['settings']['port'], debug=rest_settings['settings']['debug'], threaded=True)
 
 
 # Start Flask server
 if __name__ == '__main__':
-    # load modules
-    load_modules()
     # run REST engine
     run_engine()
