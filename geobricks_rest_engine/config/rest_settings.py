@@ -175,7 +175,6 @@ settings = {
                 "url_prefix": "/processing"
             },
             {
-
                 # Description, not used by the code.
                 "description": "MODIS",
 
@@ -190,6 +189,23 @@ settings = {
 
                 # The prefix to be used for the Blueprint
                 "url_prefix": "/browse/modis"
+
+            },
+            {
+                # Description, not used by the code.
+                "description": "TRMM",
+
+                # The path to the Python file containing the Blueprint
+                "path_to_the_blueprint": "geobricks_trmm.rest.trmm_rest",
+
+                # The path to the Python file containing the configuration
+                "path_to_the_config": "geobricks_trmm.config.trmm_config",
+
+                # The name of the Blueprint
+                "blueprint_name": "trmm",
+
+                # The prefix to be used for the Blueprint
+                "url_prefix": "/browse/trmm"
 
             },
             {
