@@ -53,6 +53,7 @@ def load_modules():
         except Exception, e:
             log.warning(e)
 
+
 @app.route('/')
 @cross_origin(origins='*')
 def root():
@@ -61,6 +62,7 @@ def root():
     @return: Welcome message.
     """
     return 'Welcome to Geobricks!'
+
 
 @app.route('/discovery/')
 @cross_origin(origins='*')
@@ -100,9 +102,9 @@ def discovery_by_name(name):
     return Response(json.dumps(result), content_type='application/json; charset=utf-8')
 
 
-@app.route('/discovery/<type>/')
+@app.route('/discovery/<resource_type>/')
 @cross_origin(origins='*')
-def discovery_by_type(type):
+def discovery_by_type(resource_type):
     """
     Discovery service to list all the available Geobricks plug-ins.
     @return: List of objects describing the plug-in: name, description and type.
@@ -113,8 +115,11 @@ def discovery_by_type(type):
         if '.' in r.endpoint and rule_name.endswith('/') and 'discovery' in rule_name:
             discovery_url = request.host_url + rule_name[1:]
             plugin_description = json.load(urllib2.urlopen(discovery_url))
-            if type.upper() in plugin_description['type'].upper():
-                rules.append(plugin_description)
+            try:
+                if resource_type.upper() in plugin_description['properties']['service_type']['default'].upper():
+                    rules.append(plugin_description)
+            except KeyError:
+                pass
     rules.sort()
     return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
@@ -123,7 +128,10 @@ def run_engine():
     # load modules
     load_modules()
     # load REST engine
-    app.run(host=rest_settings['settings']['host'], port=rest_settings['settings']['port'], debug=rest_settings['settings']['debug'], threaded=True)
+    app.run(host=rest_settings['settings']['host'],
+            port=rest_settings['settings']['port'],
+            debug=rest_settings['settings']['debug'],
+            threaded=True)
 
 
 # Start Flask server
