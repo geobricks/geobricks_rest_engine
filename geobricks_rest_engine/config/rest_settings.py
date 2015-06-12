@@ -23,9 +23,6 @@ settings = {
                 # The path to the Python file containing the Blueprint
                 "path_to_the_blueprint": "geobricks_common.rest.common_rest",
 
-                # The path to the Python file containing the configuration
-                "path_to_the_config": "geobricks_common.config.config",
-
                 # The name of the Blueprint
                 "blueprint_name": "app",
 
