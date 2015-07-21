@@ -1,8 +1,9 @@
 import json
 import logging
 import urllib2
+import urllib
 from flask import Flask
-from flask import request
+from flask import request, url_for
 from flask import Response
 from flask.ext.cors import CORS
 from importlib import import_module
@@ -29,6 +30,8 @@ cors = CORS(app, resources={r'/*': {'origins': '*', 'headers': ['Content-Type']}
 def load_modules():
     for module in rest_settings['settings']['modules']:
 
+        print module
+
         try:
             try:
                 # Overwrite modules settings
@@ -48,11 +51,11 @@ def load_modules():
                 # Register Blueprint
                 app.register_blueprint(rest, url_prefix=module['url_prefix'])
                 log.info("Module loaded: " + module['path_to_the_blueprint'])
+                print module,
             except Exception, e:
                 log.warning(e)
         except Exception, e:
             log.warning(e)
-
 
 @app.route('/')
 @cross_origin(origins='*')
@@ -63,7 +66,6 @@ def root():
     """
     return 'Welcome to Geobricks!'
 
-
 @app.route('/discovery/')
 @cross_origin(origins='*')
 def discovery():
@@ -72,13 +74,13 @@ def discovery():
     @return: List of objects describing the plug-in: name, description and type.
     """
     rules = []
-    for r in app.url_map.iter_rules():
-        rule_name = str(r)
-        if '.' in r.endpoint and rule_name.endswith('/') and 'discovery' in rule_name:
+    for rule in app.url_map.iter_rules():
+        rule_name = str(rule)
+        if '.' in rule.endpoint and rule_name.endswith('/') and 'discovery' in rule_name:
             discovery_url = request.host_url + rule_name[1:]
             plugin_description = json.load(urllib2.urlopen(discovery_url))
             rules.append(plugin_description)
-    rules.sort()
+
     return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
 
@@ -102,9 +104,9 @@ def discovery_by_name(name):
     return Response(json.dumps(result), content_type='application/json; charset=utf-8')
 
 
-@app.route('/discovery/<resource_type>/')
+@app.route('/discovery/<type>/')
 @cross_origin(origins='*')
-def discovery_by_type(resource_type):
+def discovery_by_type(type):
     """
     Discovery service to list all the available Geobricks plug-ins.
     @return: List of objects describing the plug-in: name, description and type.
@@ -112,29 +114,30 @@ def discovery_by_type(resource_type):
     rules = []
     for r in app.url_map.iter_rules():
         rule_name = str(r)
+        print rule_name
         if '.' in r.endpoint and rule_name.endswith('/') and 'discovery' in rule_name:
             discovery_url = request.host_url + rule_name[1:]
             plugin_description = json.load(urllib2.urlopen(discovery_url))
-            try:
-                if resource_type.upper() in plugin_description['properties']['service_type']['default'].upper():
-                    rules.append(plugin_description)
-            except KeyError:
-                pass
+            if type.upper() in plugin_description['type'].upper():
+                rules.append(plugin_description)
     rules.sort()
     return Response(json.dumps(rules), content_type='application/json; charset=utf-8')
 
 
-def run_engine():
+# def run_engine():
+#     # load modules
+#     load_modules()
+#     # load REST engine
+#     app.run(host=rest_settings['settings']['host'], port=rest_settings['settings']['port'], debug=rest_settings['settings']['debug'], threaded=True)
+
+def run_engine(run_flask=True):
     # load modules
     load_modules()
     # load REST engine
-    app.run(host=rest_settings['settings']['host'],
-            port=rest_settings['settings']['port'],
-            debug=rest_settings['settings']['debug'],
-            threaded=True)
-
+    if run_flask:
+        app.run(host=rest_settings['settings']['host'], port=rest_settings['settings']['port'], debug=rest_settings['settings']['debug'], threaded=True)
 
 # Start Flask server
-if __name__ == '__main__':
-    # run REST engine
-    run_engine()
+# if __name__ == '__main__':
+#     # run REST engine
+#     run_engine()
